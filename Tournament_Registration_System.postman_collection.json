@@ -1,0 +1,516 @@
+{
+  "info": {
+    "_postman_id": "8fa3c004-9494-469b-891a-cc6e5c8e390c",
+    "name": "Tournament Registration & Leaderboard System",
+    "description": "Postman Collection for testing the Tournament Registration & Leaderboard System backend API. Built with Node.js, Express, and MongoDB.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "health"
+          ]
+        },
+        "description": "Check the health status of the application."
+      },
+      "response": [
+        {
+          "name": "Health Check OK",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "health"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"success\": true,\n    \"message\": \"Health status retrieved successfully\",\n    \"data\": {\n        \"status\": \"OK\"\n    }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Players",
+      "item": [
+        {
+          "name": "Create Player",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Alice Smith\",\n    \"email\": \"alice.smith@example.com\",\n    \"country\": \"USA\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/players",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "players"
+              ]
+            },
+            "description": "Registers a new player in the database."
+          },
+          "response": [
+            {
+              "name": "Player Created Successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\": \"Alice Smith\",\n    \"email\": \"alice.smith@example.com\",\n    \"country\": \"USA\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/players",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "players"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Player created successfully\",\n    \"data\": {\n        \"_id\": \"66657943e7faabf40abb9bd4d\",\n        \"name\": \"Alice Smith\",\n        \"email\": \"alice.smith@example.com\",\n        \"country\": \"USA\",\n        \"createdAt\": \"2026-07-15T14:07:35.123Z\",\n        \"updatedAt\": \"2026-07-15T14:07:35.123Z\",\n        \"__v\": 0\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "List & Search Players",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/players?search=Alice&page=1&limit=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "players"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "Alice",
+                  "description": "Optional search term for name, country, or email"
+                },
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number"
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Page size limit"
+                }
+              ]
+            },
+            "description": "Retrieve all players with search filtering and pagination details."
+          },
+          "response": [
+            {
+              "name": "Players List Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/players?search=Alice&page=1&limit=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "players"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "Alice"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Players retrieved successfully\",\n    \"data\": [\n        {\n            \"_id\": \"66657943e7faabf40abb9bd4d\",\n            \"name\": \"Alice Smith\",\n            \"email\": \"alice.smith@example.com\",\n            \"country\": \"USA\",\n            \"createdAt\": \"2026-07-15T14:07:35.123Z\",\n            \"updatedAt\": \"2026-07-15T14:07:35.123Z\",\n            \"__v\": 0\n        }\n    ],\n    \"pagination\": {\n        \"total\": 1,\n        \"page\": 1,\n        \"limit\": 10,\n        \"totalPages\": 1\n    }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Tournaments",
+      "item": [
+        {
+          "name": "Create Tournament",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Pro League Summer Arena\",\n    \"maxPlayers\": 100\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/tournaments",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "tournaments"
+              ]
+            },
+            "description": "Creates a new tournament."
+          },
+          "response": [
+            {
+              "name": "Tournament Created Successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\": \"Pro League Summer Arena\",\n    \"maxPlayers\": 100\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tournaments",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tournaments"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Tournament created successfully\",\n    \"data\": {\n        \"_id\": \"66657943e7faabf40abb9bd51\",\n        \"name\": \"Pro League Summer Arena\",\n        \"maxPlayers\": 100,\n        \"createdAt\": \"2026-07-15T14:07:40.456Z\",\n        \"updatedAt\": \"2026-07-15T14:07:40.456Z\",\n        \"__v\": 0\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Register Player",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"playerId\": \"66657943e7faabf40abb9bd4d\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/tournaments/66657943e7faabf40abb9bd51/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "tournaments",
+                "66657943e7faabf40abb9bd51",
+                "register"
+              ]
+            },
+            "description": "Registers a player for a specific tournament. Enforces capacity limits and uniqueness rules."
+          },
+          "response": [
+            {
+              "name": "Player Registered Successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"playerId\": \"66657943e7faabf40abb9bd4d\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tournaments/66657943e7faabf40abb9bd51/register",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tournaments",
+                    "66657943e7faabf40abb9bd51",
+                    "register"
+              ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Player registered for tournament successfully\",\n    \"data\": {\n        \"_id\": \"66657943e7faabf40abb9bd53\",\n        \"tournament\": \"66657943e7faabf40abb9bd51\",\n        \"player\": \"66657943e7faabf40abb9bd4d\",\n        \"createdAt\": \"2026-07-15T14:07:45.789Z\",\n        \"updatedAt\": \"2026-07-15T14:07:45.789Z\",\n        \"__v\": 0\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Submit Score",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"playerId\": \"66657943e7faabf40abb9bd4d\",\n    \"score\": 450\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/tournaments/66657943e7faabf40abb9bd51/score",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "tournaments",
+                "66657943e7faabf40abb9bd51",
+                "score"
+              ]
+            },
+            "description": "Submits or updates a player's score for a tournament."
+          },
+          "response": [
+            {
+              "name": "Score Submitted Successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"playerId\": \"66657943e7faabf40abb9bd4d\",\n    \"score\": 450\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tournaments/66657943e7faabf40abb9bd51/score",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tournaments",
+                    "66657943e7faabf40abb9bd51",
+                    "score"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Score submitted successfully\",\n    \"data\": {\n        \"_id\": \"66657943e7faabf40abb9bd55\",\n        \"tournament\": \"66657943e7faabf40abb9bd51\",\n        \"player\": \"66657943e7faabf40abb9bd4d\",\n        \"score\": 450,\n        \"createdAt\": \"2026-07-15T14:07:50.123Z\",\n        \"updatedAt\": \"2026-07-15T14:07:50.123Z\",\n        \"__v\": 0\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Leaderboard",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/tournaments/66657943e7faabf40abb9bd51/leaderboard?page=1&limit=10&search=",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "tournaments",
+                "66657943e7faabf40abb9bd51",
+                "leaderboard"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number"
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Page limit"
+                },
+                {
+                  "key": "search",
+                  "value": "",
+                  "description": "Filter by player name or country"
+                }
+              ]
+            },
+            "description": "Returns the list of players on the leaderboard sorted by score desc and name asc."
+          },
+          "response": [
+            {
+              "name": "Leaderboard Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/tournaments/66657943e7faabf40abb9bd51/leaderboard?page=1&limit=10&search="
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Leaderboard retrieved successfully\",\n    \"data\": [\n        {\n            \"rank\": 1,\n            \"playerId\": \"66657943e7faabf40abb9bd4d\",\n            \"name\": \"Alice Smith\",\n            \"country\": \"USA\",\n            \"score\": 450\n        }\n    ],\n    \"pagination\": {\n        \"total\": 1,\n        \"page\": 1,\n        \"limit\": 10,\n        \"totalPages\": 1\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Player Stats & Rank",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/tournaments/66657943e7faabf40abb9bd51/player/66657943e7faabf40abb9bd4d",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "tournaments",
+                "66657943e7faabf40abb9bd51",
+                "player",
+                "66657943e7faabf40abb9bd4d"
+              ]
+            },
+            "description": "Gets the rank and stats of a player in a tournament, defaulting score to 0 if not submitted."
+          },
+          "response": [
+            {
+              "name": "Player Stats Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/tournaments/66657943e7faabf40abb9bd51/player/66657943e7faabf40abb9bd4d"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Player tournament stats retrieved successfully\",\n    \"data\": {\n        \"playerId\": \"66657943e7faabf40abb9bd4d\",\n        \"name\": \"Alice Smith\",\n        \"score\": 450,\n        \"rank\": 1\n    }\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ]
+}
